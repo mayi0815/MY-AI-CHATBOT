@@ -10,6 +10,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
 lib64/
 parts/
 sdist/
@@ -20,37 +21,32 @@ wheels/
 *.egg
 
 # Virtual Environment
-.env
-.venv
-env/
 venv/
 ENV/
+env/
 
 # IDE
 .idea/
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
 *.swp
 *.swo
-.project
-.pydevproject
-.settings/
+
+# Logs
+*.log
+
+# Local configuration
+.env
+config.local.yaml
+
+# System files
+.DS_Store
+Thumbs.db
 
 # Project specific
-/logs
-/config
-/cache
-/models
-/build
-/dist
-/installer
-xiaozhi.spec
+assets/emojis/*.gif
+!assets/emojis/neutral.gif
 
 # OS specific
-.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100

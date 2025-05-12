@@ -23,7 +23,7 @@ class Property:
         elif isinstance(test_value, str):
             self.type = ValueType.STRING
         else:
-            raise TypeError(f"不支持的属性类型: {type(test_value)}")
+            raise TypeError(f"type not supported: {type(test_value)}")
 
     def get_descriptor_json(self) -> Dict:
         return {
@@ -79,7 +79,7 @@ class Method:
         # 检查必需参数
         for name, param in self.parameters.items():
             if param.required and param.get_value() is None:
-                raise ValueError(f"缺少必需参数: {name}")
+                raise ValueError(f"parameters needed: {name}")
 
         # 调用回调函数
         return self.callback(self.parameters)
@@ -118,7 +118,7 @@ class Thing:
     def invoke(self, command: Dict) -> Any:
         method_name = command.get("method")
         if method_name not in self.methods:
-            raise ValueError(f"方法不存在: {method_name}")
+            raise ValueError(f"method not exist: {method_name}")
 
         parameters = command.get("parameters", {})
         return self.methods[method_name].invoke(parameters)

@@ -3,29 +3,29 @@ from typing import Optional, Callable
 import logging
 
 class BaseDisplay(ABC):
-    """显示接口的抽象基类"""
+    """Abstract base class for display interface"""
 
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.current_volume = 70  # 默认音量值
+        self.current_volume = 70  # Default volume value
         self.volume_controller = None
         
-        # 检查音量控制依赖
+        # Check volume control dependencies
         try:
             from src.utils.volume_controller import VolumeController
             if VolumeController.check_dependencies():
                 self.volume_controller = VolumeController()
-                self.logger.info("音量控制器初始化成功")
-                # 读取系统当前音量
+                self.logger.info("Volume controller initialized successfully")
+                # Read current system volume
                 try:
                     self.current_volume = self.volume_controller.get_volume()
-                    self.logger.info(f"读取到系统音量: {self.current_volume}%")
+                    self.logger.info(f"System volume read: {self.current_volume}%")
                 except Exception as e:
-                    self.logger.warning(f"获取初始系统音量失败: {e}，将使用默认值 {self.current_volume}%")
+                    self.logger.warning(f"Failed to get initial system volume: {e}, will use default value {self.current_volume}%")
             else:
-                self.logger.warning("音量控制依赖不满足，将使用默认音量控制")
+                self.logger.warning("Volume control dependencies not met, will use default volume control")
         except Exception as e:
-            self.logger.warning(f"音量控制器初始化失败: {e}，将使用模拟音量控制")
+            self.logger.warning(f"Volume controller initialization failed: {e}, will use simulated volume control")
 
     @abstractmethod
     def set_callbacks(self,
@@ -37,78 +37,78 @@ class BaseDisplay(ABC):
                      mode_callback: Optional[Callable] = None,
                      auto_callback: Optional[Callable] = None,
                      abort_callback: Optional[Callable] = None,
-                     send_text_callback: Optional[Callable] = None):  # 添加打断回调参数
-        """设置回调函数"""
+                     send_text_callback: Optional[Callable] = None):  # Add abort callback parameter
+        """Set callback functions"""
         pass
 
     @abstractmethod
     def update_button_status(self, text: str):
-        """更新按钮状态"""
+        """Update button status"""
         pass
 
     @abstractmethod
     def update_status(self, status: str):
-        """更新状态文本"""
+        """Update status text"""
         pass
 
     @abstractmethod
     def update_text(self, text: str):
-        """更新TTS文本"""
+        """Update TTS text"""
         pass
 
     @abstractmethod
     def update_emotion(self, emotion: str):
-        """更新表情"""
+        """Update emotion"""
         pass
 
     def get_current_volume(self):
-        """获取当前音量"""
+        """Get current volume"""
         if self.volume_controller:
             try:
-                # 从系统获取最新音量
+                # Get latest volume from system
                 self.current_volume = self.volume_controller.get_volume()
-                # 获取成功，标记音量控制器正常工作
+                # If successful, mark volume controller as working
                 if hasattr(self, 'volume_controller_failed'):
                     self.volume_controller_failed = False
             except Exception as e:
-                self.logger.debug(f"获取系统音量失败: {e}")
-                # 标记音量控制器工作异常
+                self.logger.debug(f"Failed to get system volume: {e}")
+                # Mark volume controller as not working
                 self.volume_controller_failed = True
         return self.current_volume
 
     def update_volume(self, volume: int):
-        """更新系统音量"""
-        # 确保音量在有效范围内
+        """Update system volume"""
+        # Ensure volume is within valid range
         volume = max(0, min(100, volume))
         
-        # 更新内部音量值
+        # Update internal volume value
         self.current_volume = volume
-        self.logger.info(f"设置音量: {volume}%")
+        self.logger.info(f"Setting volume: {volume}%")
         
-        # 尝试更新系统音量
+        # Try to update system volume
         if self.volume_controller:
             try:
                 self.volume_controller.set_volume(volume)
-                self.logger.debug(f"系统音量已设置为: {volume}%")
+                self.logger.debug(f"System volume set to: {volume}%")
             except Exception as e:
-                self.logger.warning(f"设置系统音量失败: {e}")
+                self.logger.warning(f"Failed to set system volume: {e}")
 
     @abstractmethod
     def start(self):
-        """启动显示"""
+        """Start display"""
         pass
 
     @abstractmethod
     def on_close(self):
-        """关闭显示"""
+        """Close display"""
         pass
 
     @abstractmethod
     def start_keyboard_listener(self):
-        """启动键盘监听"""
+        """Start keyboard listener"""
         pass
 
     @abstractmethod
     def stop_keyboard_listener(self):
-        """停止键盘监听"""
+        """Stop keyboard listener"""
         pass

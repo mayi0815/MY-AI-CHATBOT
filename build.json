@@ -1,5 +1,5 @@
 {
-    "name": "xiaozhi",
+    "name": "my ai chatbot",
     "version": "1.0.0",
     "publisher": "Junsen",
     "entry": "main.py",
@@ -25,7 +25,7 @@
             "format": "deb",
             "desktop_entry": true,
             "categories": "Utility;Development;",
-            "description": "小智Ai客户端",
+            "description": "my ai chatbot client",
             "requires": "libc6,libgtk-3-0,libx11-6,libopenblas-dev",
             "additional_pyinstaller_args": "--add-data assets:assets --add-data libs:libs --add-data src:src --add-data models:models --hidden-import=PyQt5"
         },
