@@ -2,6 +2,10 @@
 ## Project Introduction
 my ai chat bot is a Python-based Xiaozhi voice client, designed to learn coding and experience AI voice interaction without hardware requirements.
 
+## Upcoming Features
+- [ ] **New GUI (Electron)**: Provides a more modern and beautiful user interface, optimizing the interaction experience.
+- [ ] **NEW LANGUAGE SUPPORT** : Integration of French Voice Recognition and French Text Recognition.
+
 ## Features
 - **AI Voice Interaction**: Supports voice input and recognition, enabling smart human-computer interaction with natural conversation flow.
 - **Visual Multimodal**: Supports image recognition and processing, providing multimodal interaction capabilities and image content understanding.
@@ -70,8 +74,6 @@ For supported device types and usage examples, please refer to the IoT Functiona
      Complete
 ```
 
-## Upcoming Features
-- [ ] **New GUI (Electron)**: Provides a more modern and beautiful user interface, optimizing the interaction experience.
 
 ## FAQ
 - **Can't find audio device**: Please check if your microphone and speakers are properly connected and enabled.
