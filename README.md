@@ -1,7 +1,6 @@
 
 ## Project Introduction
-my ai chat bot is a Python-based Xiaozhi voice client, designed to learn coding and experience AI voice interaction without hardware requirements. This repository is ported from xiaozhi-esp32.
-
+my ai chat bot is a Python-based Xiaozhi voice client, designed to learn coding and experience AI voice interaction without hardware requirements.
 
 ## Features
 - **AI Voice Interaction**: Supports voice input and recognition, enabling smart human-computer interaction with natural conversation flow.
